@@ -10,25 +10,17 @@ package bo;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import framework.BaseAction;
-
-public class LoginAction extends BaseAction
+public class MessageAction extends Action
 {
-	/**
-	 * 
-	 * 用户登录
-	 *
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param httpservletresponse
-	 * @return
-	 */
-	public ActionForward login(ActionMapping mapping, ActionForm form, HttpServletRequest request,HttpServletResponse httpservletresponse){
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse httpservletresponse)
+	    throws Exception
+	{
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		ActionForward actionForward = null;
@@ -39,6 +31,4 @@ public class LoginAction extends BaseAction
 		}
 		return actionForward;
 	}
-	
-	
 }

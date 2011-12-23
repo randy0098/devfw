@@ -10,6 +10,9 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import framework.BaseDAO;
+import framework.DAOController;
+
 public class MessageDAO extends BaseDAO
 {
 

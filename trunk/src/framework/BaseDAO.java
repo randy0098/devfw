@@ -5,7 +5,7 @@
  * Copyright (c) 2010   All rights reserved. ======================
  */
 
-package dao;
+package framework;
 
 
 public class BaseDAO

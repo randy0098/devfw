@@ -5,7 +5,7 @@
  * Copyright (c) 2010   All rights reserved. ======================
  */
 
-package dao;
+package framework;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
