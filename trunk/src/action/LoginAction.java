@@ -5,26 +5,27 @@
  * Copyright (c) 2010   All rights reserved. ======================
  */
 
-package bo;
+package action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-public class LoginAction extends Action
+import framework.BaseAction;
+
+public class LoginAction extends BaseAction
 {
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	public ActionForward login(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 	        HttpServletResponse httpservletresponse)
 	    throws Exception
 	{
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		ActionForward actionForward = null;
-		if((name!=null&&name.equalsIgnoreCase("leon")==true)&&(password!=null&&password.equalsIgnoreCase("0098")==true)){
+		if((name!=null&&name.equalsIgnoreCase("1")==true)&&(password!=null&&password.equalsIgnoreCase("1")==true)){
 			actionForward = mapping.findForward("success");
 		}else{
 			actionForward = mapping.findForward("fail");

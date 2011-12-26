@@ -15,7 +15,6 @@ import framework.DAOController;
 
 public class MessageDAO extends BaseDAO
 {
-
 	public static void main(String[] args)
 	{
 		DAOController controller = new DAOController();
