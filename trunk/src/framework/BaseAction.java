@@ -25,7 +25,10 @@ public class BaseAction extends Action
 	{
 		//取得action名称
 		//uncertain
-		String actionName = request.getServletPath().replace("/", "").replace(".do", "");
+		String[] path = request.getServletPath().split("/");
+		String actionName = path[path.length-1].replace(".do", "");
+		System.out.println("servletPath:" + request.getServletPath());
+		System.out.println("actionName:" + actionName);
 		Class cls = this.getClass();
 		//设置调用函数的参数类型
 		Class[] paraTypes = new Class[4];

@@ -24,8 +24,9 @@ public class MessageDAO extends BaseDAO
 	 *
 	 * @return
 	 * @throws CloneNotSupportedException
+	 * @throws SQLException 
 	 */
-	public static ArrayList getMessageList() throws CloneNotSupportedException{
+	public static ArrayList getMessageList() throws CloneNotSupportedException, SQLException{
 		DAOController controller = new DAOController();
 		String sql = "SELECT * FROM DEVFW_MESSAGE";
 		ResultSet rs = controller.select(sql);
@@ -57,7 +58,26 @@ public class MessageDAO extends BaseDAO
 		return messages;
 	}
 	
-	public static void main(String[] args)
+	/**
+	 * 
+	 * 短信记录保存
+	 *
+	 * @param form
+	 * @return
+	 * @throws SQLException 
+	 */
+	public static boolean insertMessage(MessageTO message) throws SQLException{
+		DAOController controller = new DAOController();
+		String values = "'"+message.getSender()+"'," + "'"+message.getReceiver()+"'," + "'"+message.getContent()+"'," + "'"+message.getMsg_time()+"'";
+		String sql = "INSERT INTO DEVFW_MESSAGE(SENDER,RECEIVER,CONTENT,MSG_TIME) VALUES("+ values + ")";
+		System.out.println("insertMessage:" + sql);
+		boolean result = controller.insert(sql);
+		controller.close();
+		return result;
+	}
+	
+	
+	public static void main(String[] args) throws SQLException
 	{
 		DAOController controller = new DAOController();
 		String sql = "SELECT * FROM DEVFW_MESSAGE";

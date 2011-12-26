@@ -7,6 +7,8 @@
 
 package to;
 
+import framework.BaseTO;
+
 
 public class MessageTO extends BaseTO
 {

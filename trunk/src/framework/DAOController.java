@@ -12,124 +12,86 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 public class DAOController
 {
 	private Connection conn = null;
+
 	PreparedStatement ps = null;
+
 	ResultSet rs = null;
 
-	public DAOController(){
+	public DAOController()
+	{
 		conn = DBConnection.getConnection();
 	}
-	
-	public boolean insert(String sql){
+
+	public boolean insert(String sql)
+	    throws SQLException
+	{
 		boolean result = false;
-		try
-        {
-	        ps = conn.prepareStatement(sql);
-	        result = ps.execute();
-        }
-        catch (SQLException e)
-        {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-        }
-        return result;
+		ps = conn.prepareStatement(sql);
+		result = ps.execute();
+		return result;
 	}
-	
+
 	/**
 	 * 
 	 * 修改记录
+	 * @throws SQLException 
 	 *
 	 */
-	public int update(String sql){
+	public int update(String sql)
+	    throws SQLException
+	{
 		int result = 0;
-		try
-        {
-	        ps = conn.prepareStatement(sql);
-	        result = ps.executeUpdate();
-        }
-        catch (SQLException e)
-        {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-        }
+		ps = conn.prepareStatement(sql);
+		result = ps.executeUpdate();
 		return result;
 	}
-	
+
 	/**
 	 * 
 	 * 查询记录
+	 * @throws SQLException 
 	 *
 	 */
-	public ResultSet select(String sql){
-		try
-        {
-	        ps = conn.prepareStatement(sql);
-	        rs = ps.executeQuery();
-        }
-        catch (SQLException e)
-        {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-        }
+	public ResultSet select(String sql)
+	    throws SQLException
+	{
+		ps = conn.prepareStatement(sql);
+		rs = ps.executeQuery();
 		return rs;
 	}
-	
+
 	/**
 	 * 
 	 * 删除记录
+	 * @throws SQLException 
 	 *
 	 */
-	public boolean delete(String sql){
+	public boolean delete(String sql)
+	    throws SQLException
+	{
 		boolean result = false;
-		try
-        {
-	        ps = conn.prepareStatement(sql);
-	        result = ps.execute();
-        }
-        catch (SQLException e)
-        {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-        }
-        return result;
+		ps = conn.prepareStatement(sql);
+		result = ps.execute();
+		return result;
 	}
-	
-	public void close(){
-		if(rs!=null){
-			try
-            {
-	            rs.close();
-            }
-            catch (SQLException e)
-            {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-            }
+
+	public void close()
+	    throws SQLException
+	{
+		if (rs != null)
+		{
+			rs.close();
 		}
-		if(ps!=null){
-			try
-            {
-	            rs.close();
-            }
-            catch (SQLException e)
-            {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-            }
+		if (ps != null)
+		{
+			ps.close();
 		}
-		if(conn!=null){
-			try
-            {
-	            rs.close();
-            }
-            catch (SQLException e)
-            {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-            }
+		if (conn != null)
+		{
+			conn.close();
 		}
 	}
 }
