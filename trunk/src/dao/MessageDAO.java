@@ -9,12 +9,54 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import to.MessageTO;
 import framework.BaseDAO;
 import framework.DAOController;
 
+
 public class MessageDAO extends BaseDAO
 {
+	/**
+	 * 
+	 * 查询短信记录列表
+	 *
+	 * @return
+	 * @throws CloneNotSupportedException
+	 */
+	public static ArrayList getMessageList() throws CloneNotSupportedException{
+		DAOController controller = new DAOController();
+		String sql = "SELECT * FROM DEVFW_MESSAGE";
+		ResultSet rs = controller.select(sql);
+    	ArrayList messages = new ArrayList();
+		try
+        {
+	        while (rs.next())
+	        {
+	        	String id = rs.getString("ID");
+	        	String sender = rs.getString("SENDER");
+	        	String receiver = rs.getString("RECEIVER");
+	        	String content = rs.getString("CONTENT");
+	        	String msg_time = rs.getString("MSG_TIME");
+	    		MessageTO messageTO = new MessageTO();
+	    		messageTO.setId(id);
+	    		messageTO.setSender(sender);
+	    		messageTO.setReceiver(receiver);
+	    		messageTO.setContent(content);
+	    		messageTO.setMsg_time(msg_time);
+	        	messages.add(messageTO.clone());
+	        }
+	        controller.close();
+        }
+        catch (SQLException e)
+        {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+        }
+		return messages;
+	}
+	
 	public static void main(String[] args)
 	{
 		DAOController controller = new DAOController();

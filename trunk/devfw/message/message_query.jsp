@@ -13,7 +13,7 @@
 		<tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
 		
 		<c:forEach var="message" items="${messages}">
-			<c:out value="${message}"/>
+			<c:out value="${message.content}"/><br/>
 		</c:forEach>
 	</table>
 </body>

@@ -146,12 +146,12 @@
 
     end samples -->
     
-      <action path="/login" type="bo.LoginAction" >
+      <action path="/login" type="action.LoginAction" >
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message_query.do" />
       </action>
       
-      <action path="/message_query" name="messageForm" scope="request" type="bo.MessageAction" >
+      <action path="/message_query" name="messageForm" scope="request" type="action.MessageAction" >
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message/message_query.jsp" />
       </action>

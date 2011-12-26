@@ -7,7 +7,8 @@
 
 package to;
 
-public class MessageTO implements Cloneable
+
+public class MessageTO extends BaseTO
 {
 	private String id;
 	private String sender;
@@ -55,4 +56,5 @@ public class MessageTO implements Cloneable
     {
     	this.msg_time = msg_time;
     }
+	
 }
