@@ -93,4 +93,51 @@ public class MessageAction extends BaseAction
 		ActionForward forward = mapping.findForward("success");
 		return forward;
 	}
+	
+	/**
+	 * 
+	 * 保存单条短信记录信息
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param httpservletresponse
+	 * @return
+	 * @throws Exception
+	 */
+	
+	public ActionForward message_update(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse httpservletresponse)
+	    throws Exception
+	{
+		MessageTO message = new MessageTO();
+		DynaActionForm messageForm = (DynaActionForm)form;
+		BeanUtils.copyProperties(message, messageForm);
+		message.setMsg_time("20111227");
+		MessageDAO.updateMessage(message);
+		ActionForward forward = mapping.findForward("success");
+		return forward;
+	}
+	
+	
+	/**
+	 * 
+	 * 删除单条短信记录信息
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param httpservletresponse
+	 * @return
+	 * @throws Exception
+	 */
+	
+	public ActionForward message_delete(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse httpservletresponse)
+	    throws Exception
+	{
+		MessageDAO.deleteMessage(request.getParameter("id"));
+		ActionForward forward = mapping.findForward("success");
+		return forward;
+	}
 }

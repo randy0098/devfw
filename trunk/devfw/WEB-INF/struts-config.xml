@@ -165,6 +165,17 @@
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message/message_update.jsp" />
       </action>
+      
+      <action path="/message/message_update" name="messageForm" scope="request" type="action.MessageAction" >
+          <forward name="fail" path="/fail.jsp" />
+          <forward name="success" path="/message_query.do" />
+      </action>
+      
+      <action path="/message/message_delete" name="messageForm" scope="request" type="action.MessageAction" >
+          <forward name="fail" path="/fail.jsp" />
+          <forward name="success" path="/message_query.do" />
+      </action>
+      
     </action-mappings>
 
 

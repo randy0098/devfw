@@ -25,8 +25,8 @@
 				<td colspan="2" style="text-align: center;"><input type="submit" value="保存"></td>
 			</tr>	
 		</table>
-		<input type="text" name="id">
-		<input type="text" name="msg_time">	
+		<input type="hidden" name="id" value="${messageTO.id}">
+		<input type="hidden" name="msg_time" value="${messageTO.msg_time}">	
 	</form>
 </body>
 </html>

@@ -98,6 +98,45 @@ public class MessageDAO extends BaseDAO
 		return messageTO;
 	}
 	
+	
+	/**
+	 * 
+	 * 保存单条短信记录
+	 *
+	 * @return
+	 * @throws CloneNotSupportedException
+	 * @throws SQLException 
+	 */
+	public static int updateMessage(MessageTO message) throws CloneNotSupportedException, SQLException{
+		DAOController controller = new DAOController();
+		String updateSql = "SENDER = '"+message.getSender()+"'," 
+						+ "RECEIVER = '"+message.getReceiver()+"',"
+						+ "CONTENT = '"+message.getContent()+"',"
+						+ "MSG_TIME = '"+message.getMsg_time()+"'";
+		String sql = "UPDATE DEVFW_MESSAGE SET " + updateSql + " WHERE ID = " + message.getId();
+		System.out.println("updateMessage:" + sql);
+		int result = controller.update(sql);
+		controller.close();
+		return result;
+	}
+	
+	/**
+	 * 
+	 * 删除单条短信记录
+	 *
+	 * @return
+	 * @throws CloneNotSupportedException
+	 * @throws SQLException 
+	 */
+	public static boolean deleteMessage(String id) throws CloneNotSupportedException, SQLException{
+		DAOController controller = new DAOController();
+		String sql = "DELETE FROM DEVFW_MESSAGE WHERE ID = " + id;
+		System.out.println("deleteMessage:" + sql);
+		boolean result = controller.delete(sql);
+		controller.close();
+		return result;
+	}
+	
 	public static void main(String[] args) throws SQLException
 	{
 		DAOController controller = new DAOController();

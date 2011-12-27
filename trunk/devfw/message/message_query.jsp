@@ -7,6 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>短信记录查询</title>
 </head>
+<script type="text/javascript">
+	//删除时进行确认
+	function deleteCheck(){
+		return confirm("确定删除此记录？");
+	}
+</script>
 <body>
 	<a href="/devfw/message/message_insert.jsp" style="float: right">增加</a>
 	<table width="100%" border="1">
@@ -20,7 +26,7 @@
 				<td>${message.msg_time}</td>
 				<td>
 					<a href="/devfw/message/message_selectOne.do?id=${message.id}"/>修改</a>
-					<a href="message_insert.jsp">删除</a>
+					<a href="/devfw/message/message_delete.do?id=${message.id}" onclick="return confirm('确定删除此记录？')">删除</a>
 				</td>
 			</tr>
 		</c:forEach>

@@ -15,11 +15,11 @@
 			</tr>
 			<tr>
 				<td>接收者：</td>
-				<td><input type="text" name="receiver"></textarea></td>
+				<td><input type="text" name="receiver"></td>
 			</tr>	
 			<tr>
 				<td>内容：</td>
-				<td><textarea rows="3" cols="30" name="content"></td>
+				<td><textarea rows="3" cols="30" name="content"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;"><input type="submit" value="保存"></td>
