@@ -65,6 +65,20 @@ public class DAOController
 
 	/**
 	 * 
+	 * 查询单条记录
+	 * @throws SQLException 
+	 *
+	 */
+	public ResultSet selectOne(String sql)
+	    throws SQLException
+	{
+		ps = conn.prepareStatement(sql);
+		rs = ps.executeQuery();
+		return rs;
+	}
+	
+	/**
+	 * 
 	 * 删除记录
 	 * @throws SQLException 
 	 *

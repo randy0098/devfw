@@ -4,29 +4,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>新增短信信息</title>
+<title>修改短信信息</title>
 </head>
 <body>
-	<form action="message_insert.do" method="post">
+	<form action="message_update.do" method="post">
 		<table border="1" width="100%">
 			<tr>
 				<td width="30%">发送者：</td>
-				<td width="70%"><input type="text" name="sender"></td>
+				<td width="70%"><input type="text" name="sender" value="${messageTO.sender}"></td>
 			</tr>
 			<tr>
 				<td>接收者：</td>
-				<td><input type="text" name="receiver"></textarea></td>
+				<td><input type="text" name="receiver" value="${messageTO.receiver}"></td>
 			</tr>	
 			<tr>
 				<td>内容：</td>
-				<td><textarea rows="3" cols="30" name="content"></td>
+				<td><textarea rows="3" cols="30" name="content" >${messageTO.content}</textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;"><input type="submit" value="保存"></td>
 			</tr>	
 		</table>
-		<input type="hidden" name="id">
-		<input type="hidden" name="msg_time">	
+		<input type="text" name="id">
+		<input type="text" name="msg_time">	
 	</form>
 </body>
 </html>

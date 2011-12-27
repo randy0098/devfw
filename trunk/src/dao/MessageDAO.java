@@ -31,30 +31,22 @@ public class MessageDAO extends BaseDAO
 		String sql = "SELECT * FROM DEVFW_MESSAGE";
 		ResultSet rs = controller.select(sql);
     	ArrayList messages = new ArrayList();
-		try
+        while (rs.next())
         {
-	        while (rs.next())
-	        {
-	        	String id = rs.getString("ID");
-	        	String sender = rs.getString("SENDER");
-	        	String receiver = rs.getString("RECEIVER");
-	        	String content = rs.getString("CONTENT");
-	        	String msg_time = rs.getString("MSG_TIME");
-	    		MessageTO messageTO = new MessageTO();
-	    		messageTO.setId(id);
-	    		messageTO.setSender(sender);
-	    		messageTO.setReceiver(receiver);
-	    		messageTO.setContent(content);
-	    		messageTO.setMsg_time(msg_time);
-	        	messages.add(messageTO.clone());
-	        }
-	        controller.close();
+        	String id = rs.getString("ID");
+        	String sender = rs.getString("SENDER");
+        	String receiver = rs.getString("RECEIVER");
+        	String content = rs.getString("CONTENT");
+        	String msg_time = rs.getString("MSG_TIME");
+    		MessageTO messageTO = new MessageTO();
+    		messageTO.setId(id);
+    		messageTO.setSender(sender);
+    		messageTO.setReceiver(receiver);
+    		messageTO.setContent(content);
+    		messageTO.setMsg_time(msg_time);
+        	messages.add(messageTO.clone());
         }
-        catch (SQLException e)
-        {
-	        // TODO Auto-generated catch block
-	        e.printStackTrace();
-        }
+        controller.close();
 		return messages;
 	}
 	
@@ -76,6 +68,35 @@ public class MessageDAO extends BaseDAO
 		return result;
 	}
 	
+	/**
+	 * 
+	 * 查询单条短信记录
+	 *
+	 * @return
+	 * @throws CloneNotSupportedException
+	 * @throws SQLException 
+	 */
+	public static MessageTO getMessageInfo(String id) throws CloneNotSupportedException, SQLException{
+		DAOController controller = new DAOController();
+		String sql = "SELECT * FROM DEVFW_MESSAGE WHERE ID = " + id;
+		System.out.println("getMessageInfo:" + sql);
+		ResultSet rs = controller.selectOne(sql);
+		MessageTO messageTO = new MessageTO();
+        while (rs.next())
+        {
+        	String sender = rs.getString("SENDER");
+        	String receiver = rs.getString("RECEIVER");
+        	String content = rs.getString("CONTENT");
+        	String msg_time = rs.getString("MSG_TIME");
+    		messageTO.setId(id);
+    		messageTO.setSender(sender);
+    		messageTO.setReceiver(receiver);
+    		messageTO.setContent(content);
+    		messageTO.setMsg_time(msg_time);
+        }
+        controller.close();
+		return messageTO;
+	}
 	
 	public static void main(String[] args) throws SQLException
 	{

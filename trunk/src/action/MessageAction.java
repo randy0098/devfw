@@ -71,4 +71,26 @@ public class MessageAction extends BaseAction
 		ActionForward forward = mapping.findForward("success");
 		return forward;
 	}
+	
+	/**
+	 * 
+	 * 查询单条短信记录信息
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param httpservletresponse
+	 * @return
+	 * @throws Exception
+	 */
+	
+	public ActionForward message_selectOne(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse httpservletresponse)
+	    throws Exception
+	{
+		MessageTO messageTO = MessageDAO.getMessageInfo(request.getParameter("id"));
+		request.setAttribute("messageTO", messageTO);
+		ActionForward forward = mapping.findForward("success");
+		return forward;
+	}
 }
