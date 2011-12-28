@@ -156,6 +156,7 @@ public class MessageDAO extends BaseDAO
 	        	System.out.println("RECEIVER:" + RECEIVER);
 	        	System.out.println("CONTENT:" + CONTENT);
 	        	System.out.println("MSG_TIME:" + MSG_TIME);
+	        	System.out.println("0:"+rs.getString(1));
 	        	System.out.println("######################");
 	        }
 	        controller.close();

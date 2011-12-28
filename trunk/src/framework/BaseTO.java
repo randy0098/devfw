@@ -8,8 +8,10 @@
 package framework;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class BaseTO implements Serializable,Cloneable
+public abstract class BaseTO implements Serializable,Cloneable
 {
 	/**
 	 * 
@@ -21,4 +23,14 @@ public class BaseTO implements Serializable,Cloneable
 	public Object clone() throws CloneNotSupportedException{
 		return super.clone();
 	}
+	
+	/**
+	 * 
+	 * 用于将数据库记录封装成TO对象
+	 *
+	 * @param rs
+	 * @throws SQLException 
+	 */
+	
+	public abstract BaseTO buildTO(ResultSet rs) throws SQLException;
 }

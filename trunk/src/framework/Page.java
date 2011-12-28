@@ -7,9 +7,18 @@
 
 package framework;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 public abstract class Page
 {
@@ -33,7 +42,8 @@ public abstract class Page
 	protected String createdQuerySql;
 	//查询记录数量的sql语句
 	protected String countSql;
-	
+	//用来保存记录信息的TO类名称
+	protected String TOClassName;
 	public int getRecordNum()
     {
     	return recordNum;
@@ -91,15 +101,29 @@ public abstract class Page
     {
     	this.countSql = countSql;
     }
-	
+	public String getTOClassName()
+    {
+    	return TOClassName;
+    }
+	public void setTOClassName(String tOClassName)
+    {
+    	TOClassName = tOClassName;
+    }
 	/**
 	 * 
 	 * 创建页面
 	 * @throws SQLException 
 	 * @throws CloneNotSupportedException 
+	 * @throws NoSuchMethodException 
+	 * @throws InstantiationException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws SecurityException 
+	 * @throws IllegalArgumentException 
+	 * @throws ClassNotFoundException 
 	 *
 	 */
-	public void createPage() throws SQLException, CloneNotSupportedException{
+	public void createPage() throws SQLException, CloneNotSupportedException, IllegalArgumentException, SecurityException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, ClassNotFoundException{
 		//设置记录开始和截止序号
 		//记录序号从1开始
 		//当前页序号从1开始
@@ -125,7 +149,8 @@ public abstract class Page
 		DAOController controller = new DAOController();
 		ResultSet rs = controller.selectOne(this.countSql);
 		rs.next();
-		int recordNum = rs.getInt(0);
+		//获得记录数量，注意字段序号是从1开始。
+		int recordNum = rs.getInt(1);
 		controller.close();
 		this.recordNum = recordNum;
 	}
@@ -138,28 +163,40 @@ public abstract class Page
 	 * @return
 	 * @throws SQLException
 	 * @throws CloneNotSupportedException 
+	 * @throws InstantiationException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
+	 * @throws NoSuchMethodException 
+	 * @throws SecurityException 
+	 * @throws ClassNotFoundException 
 	 */
-	private ArrayList selectRecords() throws SQLException, CloneNotSupportedException{
+	private ArrayList selectRecords() throws SQLException, CloneNotSupportedException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException, SecurityException, NoSuchMethodException, ClassNotFoundException{
 		DAOController controller = new DAOController();
+		System.out.println("createSelectSql:"+this.createdQuerySql);
 		ResultSet rs = controller.select(this.createdQuerySql);
+		System.out.println(rs);
 		ArrayList list = new ArrayList();
+		
+		Class cls = Class.forName(this.TOClassName);
+		Class[] paraTypes = new Class[1];
+		//设置调用函数的参数类型
+		paraTypes[0] = ResultSet.class;
+		//取得调用函数
+		Method method = cls.getMethod("buildTO", paraTypes);
+		//设置函数参数值
+		Object[] args = new Object[1];
+
 		while(rs.next()){
-			BaseTO to = this.buildTO(rs);
+			args[0] = rs;
+			//调用函数获得返回值
+			BaseTO to = (BaseTO)method.invoke(cls.newInstance(), args);
+			//返回函数结果
     		list.add(to.clone());
 		}
 		controller.close();
-		return new ArrayList();
+		return (ArrayList)list.clone();
 	}
-	
-	/**
-	 * 
-	 * 将记录封装成TO对象
-	 *
-	 * @param rs
-	 * @return
-	 * @throws SQLException
-	 */
-	public abstract BaseTO buildTO(ResultSet rs) throws SQLException;
 	
 	/**
 	 * 

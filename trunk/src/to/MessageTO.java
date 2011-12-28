@@ -7,6 +7,9 @@
 
 package to;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import framework.BaseTO;
 
 
@@ -57,6 +60,19 @@ public class MessageTO extends BaseTO
 	public void setMsg_time(String msg_time)
     {
     	this.msg_time = msg_time;
+    }
+	
+	@Override
+    public BaseTO buildTO(ResultSet rs) throws SQLException
+    {
+	    // TODO Auto-generated method stub
+		MessageTO to = new MessageTO();
+		to.setId(rs.getString("ID"));
+		to.setSender(rs.getString("SENDER"));
+		to.setReceiver(rs.getString("RECEIVER"));
+		to.setContent(rs.getString("CONTENT"));
+		to.setMsg_time(rs.getString("MSG_TIME"));
+		return to;
     }
 	
 }

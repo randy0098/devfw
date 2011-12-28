@@ -7,13 +7,10 @@
 
 package util;
 
-import java.sql.ResultSet;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
-import framework.BaseTO;
 import framework.Page;
-
-import to.MessageTO;
 
 public class OraclePage extends Page
 {
@@ -24,44 +21,49 @@ public class OraclePage extends Page
 	 *
 	 */
 	public void createSelectSql(){
-		String sql = "SELECT * ";
-		sql = sql + " FROM (SELECT ROWNUM R,t1.* From devfw_message t1 where rownum <= "+this.endRecordIndex+" ) t2 ";
-		sql = sql + " Where t2.R >= "+ this.startRecordIndex;
-		this.createdQuerySql = sql;
-	}
-	
-	/**
-	 * 
-	 * 将记录封装成TO对象
-	 *
-	 * @param rs
-	 * @return
-	 * @throws SQLException
-	 */
-	public BaseTO buildTO(ResultSet rs) throws SQLException{
-    	String id = rs.getString("ID");
-    	String sender = rs.getString("SENDER");
-    	String receiver = rs.getString("RECEIVER");
-    	String content = rs.getString("CONTENT");
-    	String msg_time = rs.getString("MSG_TIME");
-		MessageTO messageTO = new MessageTO();
-		messageTO.setId(id);
-		messageTO.setSender(sender);
-		messageTO.setReceiver(receiver);
-		messageTO.setContent(content);
-		messageTO.setMsg_time(msg_time);
-		return messageTO;
+		String sql1 = " SELECT * ";
+		String sql2 = " FROM (SELECT ROWNUM R ";
+		String sql3 = " t1 WHERE ROWNUM <= " + this.endRecordIndex + " ) t2 ";
+		String sql4 = " Where t2.R >= " + this.startRecordIndex;
+		//以"from"进行分隔
+		String[] sqls = this.querySql.toLowerCase().split("from");
+		//去除多余字符
+		String[] fields = sqls[0].replaceAll("select", "").split(",");
+		//生成oracle分页查询中所需的字段列表
+		String newFields = "";
+		for(int i=0; i<fields.length; i++){
+			newFields = newFields + ",t1." + fields[i];
+		}
+		String sql5 = " from " + sqls[1];
+		String resultSql = sql1+sql2+newFields+sql5+sql3+sql4;
+		System.out.println("createdQuerySql:" + createdQuerySql);
+		this.createdQuerySql = resultSql;
 	}
 
 
-	public static void main(String[] args) throws SQLException, CloneNotSupportedException
+	public static void main(String[] args) throws SQLException, CloneNotSupportedException, IllegalArgumentException, SecurityException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, ClassNotFoundException
 	{
 		// TODO Auto-generated method stub
 		OraclePage page = new OraclePage();
 		page.setQuerySql("SELECT * FROM devfw_message");
 		page.setCountSql("SELECT COUNT(ID) AS n FROM devfw_message");
 		page.setPageRecordNum(10);
-		page.setCurrentPageIndex(2);
+		page.setCurrentPageIndex(1);
+		page.setTOClassName("to.MessageTO");
 		page.createPage();
+		System.out.println(page.getRecords().size());
+		System.out.println(page.getRecordNum());
+		
+//		String str = "select * from a".split("from")[0];
+//		System.out.println(str);
+		
+//		OraclePage page = new OraclePage();
+//		page.setQuerySql("SELECT id as test,content FROM devfw_message");
+//		page.setPageRecordNum(10);
+//		page.setCurrentPageIndex(1);
+//		page.createSelectSql();
+//		System.out.println(page.getCreatedQuerySql());
 	}
+	
+	
 }
