@@ -36,7 +36,7 @@ public class OraclePage extends Page
 		}
 		String sql5 = " from " + sqls[1];
 		String resultSql = sql1+sql2+newFields+sql5+sql3+sql4;
-		System.out.println("createdQuerySql:" + createdQuerySql);
+		System.out.println("createdQuerySql:" + resultSql);
 		this.createdQuerySql = resultSql;
 	}
 

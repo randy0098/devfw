@@ -176,6 +176,11 @@
           <forward name="success" path="/message_query.do" />
       </action>
       
+      <action path="/message/message_page" name="messageForm" scope="request" type="action.MessageAction" >
+          <forward name="fail" path="/fail.jsp" />
+          <forward name="success" path="/message/message_query.jsp" />
+      </action>
+      
     </action-mappings>
 
 

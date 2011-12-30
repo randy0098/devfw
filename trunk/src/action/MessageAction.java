@@ -19,6 +19,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
 
 import to.MessageTO;
+import util.OraclePage;
 import dao.MessageDAO;
 import framework.BaseAction;
 
@@ -41,8 +42,12 @@ public class MessageAction extends BaseAction
 	        HttpServletResponse httpservletresponse)
 	    throws Exception
 	{
-		ArrayList messages = MessageDAO.getMessageList();
-		request.setAttribute("messages", messages);
+//		ArrayList messages = MessageDAO.getMessageList();
+//		request.setAttribute("messages", messages);
+		
+		request.setAttribute("action", "go");
+		request.setAttribute("currentPageIndex", "1");
+		message_page(mapping,form,request,httpservletresponse);
 		ActionForward forward = mapping.findForward("success");
 		return forward;
 	}
@@ -137,6 +142,52 @@ public class MessageAction extends BaseAction
 	    throws Exception
 	{
 		MessageDAO.deleteMessage(request.getParameter("id"));
+		ActionForward forward = mapping.findForward("success");
+		return forward;
+	}
+	
+	
+	/**
+	 * 
+	 * 翻页
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param httpservletresponse
+	 * @return
+	 * @throws Exception
+	 */
+	
+	public ActionForward message_page(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	        HttpServletResponse httpservletresponse)
+	    throws Exception
+	{
+		String action = request.getParameter("action");
+		String currentPageIndex = request.getParameter("currentPageIndex");
+		OraclePage page = new OraclePage();
+		page.setQuerySql("SELECT * FROM devfw_message");
+		page.setCountSql("SELECT COUNT(ID) AS n FROM devfw_message");
+		page.setTOClassName("to.MessageTO");
+		page.setPageRecordNum(1);
+		if(action!=null && action.equalsIgnoreCase("goToFirst")==true){
+			page.goToFirst();
+		}
+		else if(action!=null && action.equalsIgnoreCase("goToLast")==true){
+			page.goToLast();
+		}
+		else if(action!=null && action.equalsIgnoreCase("back")==true){
+			page.setCurrentPageIndex(Integer.parseInt(currentPageIndex));
+			page.back();
+		}
+		else if(action!=null && action.equalsIgnoreCase("next")==true){
+			page.setCurrentPageIndex(Integer.parseInt(currentPageIndex));
+			page.next();
+		}
+		else if(action!=null && action.equalsIgnoreCase("go")==true){
+			page.go(Integer.parseInt(currentPageIndex));
+		}
+		request.setAttribute("page", page);
 		ActionForward forward = mapping.findForward("success");
 		return forward;
 	}

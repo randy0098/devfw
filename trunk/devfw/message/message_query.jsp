@@ -12,12 +12,27 @@
 	function deleteCheck(){
 		return confirm("确定删除此记录？");
 	}
+	
+	//转到第几页
+	function goToPage(){
+		var pageIndex = document.getElementById("pageIndex").value;
+		window.location = "/devfw/message/message_page.do?action=go&currentPageIndex="+pageIndex;
+	}
+	
+	//转向的页面数只能为数字
+	function checkNum(e){
+		if (!/^\d+$/.test(e.value))
+	    {
+	        e.value = /^\d+/.exec(e.value);
+	    }
+	    return false;
+	}
 </script>
 <body>
 	<a href="/devfw/message/message_insert.jsp" style="float: right">增加</a>
 	<table width="100%" border="1">
 		<tr><th>id</th><th>sender</th><th>receiver</th><th>content</th><th>msg_time</th><th>操作</th></tr>
-		<c:forEach var="message" items="${messages}">
+		<c:forEach var="message" items="${page.records}">
 			<tr>
 				<td>${message.id}</td>
 				<td>${message.sender}</td>
@@ -30,6 +45,18 @@
 				</td>
 			</tr>
 		</c:forEach>
+		<tr>
+			<td colspan="6">
+				<a href="/devfw/message/message_page.do?action=goToFirst">首页</a>
+				<a href="/devfw/message/message_page.do?action=goToLast">尾页</a>
+				<a href="/devfw/message/message_page.do?action=back&currentPageIndex=${page.currentPageIndex}">上一页</a>
+				<a href="/devfw/message/message_page.do?action=next&currentPageIndex=${page.currentPageIndex}">下一页</a>
+				转到第<input type="text" id="pageIndex">页
+				<input type="button" value="go" onclick="goToPage()">
+				每页显示${page.pageRecordNum}条
+				第${page.currentPageIndex}/${page.totalPage}页			
+			</td>
+		</tr>
 	</table>
 </body>
 </html>

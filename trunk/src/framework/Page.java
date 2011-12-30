@@ -134,8 +134,28 @@ public abstract class Page
 			this.createSelectSql();
 			//查询并保存查询记录结果集
 			this.records = this.selectRecords();
-			//获得记录总数
-			this.selectRecordsNum();
+			//获得记录总数和总页数
+			this.calculateTotalPage();
+		}
+	}
+	
+	/**
+	 * 
+	 * 计算得到总页数
+	 *
+	 * @return
+	 * @throws SQLException 
+	 */
+	public void calculateTotalPage() throws SQLException{
+		//获得记录总数
+		this.selectRecordsNum();
+		//获得总页数
+		if(this.pageRecordNum!=0){
+			if(this.recordNum%this.pageRecordNum == 0){
+				this.totalPage = this.recordNum/this.pageRecordNum;
+			}else{		
+				this.totalPage = this.recordNum/this.pageRecordNum+1;
+			}
 		}
 	}
 	
@@ -173,11 +193,9 @@ public abstract class Page
 	 */
 	private ArrayList selectRecords() throws SQLException, CloneNotSupportedException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException, SecurityException, NoSuchMethodException, ClassNotFoundException{
 		DAOController controller = new DAOController();
-		System.out.println("createSelectSql:"+this.createdQuerySql);
 		ResultSet rs = controller.select(this.createdQuerySql);
-		System.out.println(rs);
 		ArrayList list = new ArrayList();
-		
+		//将数据库记录封装成TO对象
 		Class cls = Class.forName(this.TOClassName);
 		Class[] paraTypes = new Class[1];
 		//设置调用函数的参数类型
@@ -205,5 +223,119 @@ public abstract class Page
 	 */
 	public abstract void createSelectSql();
 	
-
+	/**
+	 * 
+	 * 转到首页
+	 * @throws ClassNotFoundException 
+	 * @throws NoSuchMethodException 
+	 * @throws InstantiationException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws CloneNotSupportedException 
+	 * @throws SQLException 
+	 * @throws SecurityException 
+	 * @throws IllegalArgumentException 
+	 *
+	 */
+	public void goToFirst() throws IllegalArgumentException, SecurityException, SQLException, CloneNotSupportedException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, ClassNotFoundException{
+		this.setCurrentPageIndex(1);
+		this.createPage();
+	}
+	
+	/**
+	 * 
+	 * 转到尾页
+	 * @throws ClassNotFoundException 
+	 * @throws NoSuchMethodException 
+	 * @throws InstantiationException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws CloneNotSupportedException 
+	 * @throws SQLException 
+	 * @throws SecurityException 
+	 * @throws IllegalArgumentException 
+	 *
+	 */
+	public void goToLast() throws IllegalArgumentException, SecurityException, SQLException, CloneNotSupportedException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, ClassNotFoundException{
+		//获得记录总数和总页数
+		this.calculateTotalPage();
+		this.currentPageIndex = this.totalPage;
+		this.createPage();
+	}
+	
+	/**
+	 * 
+	 * 下一页
+	 * @throws ClassNotFoundException 
+	 * @throws NoSuchMethodException 
+	 * @throws InstantiationException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws CloneNotSupportedException 
+	 * @throws SQLException 
+	 * @throws SecurityException 
+	 * @throws IllegalArgumentException 
+	 *
+	 */
+	public void next() throws IllegalArgumentException, SecurityException, SQLException, CloneNotSupportedException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, ClassNotFoundException{
+		//获得记录总数和总页数
+		this.calculateTotalPage();
+		if(this.currentPageIndex<this.totalPage){
+			this.currentPageIndex = this.currentPageIndex+1;
+		}else{
+			this.currentPageIndex = this.totalPage;
+		}
+		this.createPage();		
+	}
+	
+	/**
+	 * 
+	 * 上一页
+	 * @throws ClassNotFoundException 
+	 * @throws NoSuchMethodException 
+	 * @throws InstantiationException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws CloneNotSupportedException 
+	 * @throws SQLException 
+	 * @throws SecurityException 
+	 * @throws IllegalArgumentException 
+	 *
+	 */
+	public void back() throws IllegalArgumentException, SecurityException, SQLException, CloneNotSupportedException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, ClassNotFoundException{
+		if(this.currentPageIndex>1){
+			this.currentPageIndex = this.currentPageIndex-1;
+		}else{
+			this.currentPageIndex = 1;
+		}
+		this.createPage();		
+	}
+	
+	/**
+	 * 
+	 * 转到第几页
+	 *
+	 * @param pageIndex
+	 * @throws IllegalArgumentException
+	 * @throws SecurityException
+	 * @throws SQLException
+	 * @throws CloneNotSupportedException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 * @throws InstantiationException
+	 * @throws NoSuchMethodException
+	 * @throws ClassNotFoundException
+	 */
+	public void go(int pageIndex) throws IllegalArgumentException, SecurityException, SQLException, CloneNotSupportedException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException, ClassNotFoundException{
+		//获得记录总数和总页数
+		this.calculateTotalPage();
+		if(pageIndex<1){
+			pageIndex = 1;
+		}
+		else if(pageIndex>this.totalPage){
+			pageIndex = this.totalPage;
+		}
+		this.setCurrentPageIndex(pageIndex);
+		this.createPage();
+	}
 }
