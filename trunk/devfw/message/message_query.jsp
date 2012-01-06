@@ -51,7 +51,7 @@
 				<a href="/devfw/message/message_page.do?action=goToLast">尾页</a>
 				<a href="/devfw/message/message_page.do?action=back&currentPageIndex=${page.currentPageIndex}">上一页</a>
 				<a href="/devfw/message/message_page.do?action=next&currentPageIndex=${page.currentPageIndex}">下一页</a>
-				转到第<input type="text" id="pageIndex">页
+				转到第<input type="text" id="pageIndex" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onpaste="return !clipboardData.getData('text').match(/\D/)" ondragenter="return false" style="ime-mode:Disabled">页
 				<input type="button" value="go" onclick="goToPage()">
 				每页显示${page.pageRecordNum}条
 				第${page.currentPageIndex}/${page.totalPage}页			

@@ -44,12 +44,10 @@ public class MessageAction extends BaseAction
 	{
 //		ArrayList messages = MessageDAO.getMessageList();
 //		request.setAttribute("messages", messages);
-		
 		request.setAttribute("action", "go");
 		request.setAttribute("currentPageIndex", "1");
-		message_page(mapping,form,request,httpservletresponse);
-		ActionForward forward = mapping.findForward("success");
-		return forward;
+		ActionForward actionForward = message_page(mapping,form,request,httpservletresponse);
+		return actionForward;
 	}
 	
 	/**
@@ -164,7 +162,9 @@ public class MessageAction extends BaseAction
 	    throws Exception
 	{
 		String action = request.getParameter("action");
+		System.out.println("action:" + action);
 		String currentPageIndex = request.getParameter("currentPageIndex");
+		System.out.println("currentPageIndex:" + currentPageIndex);
 		OraclePage page = new OraclePage();
 		page.setQuerySql("SELECT * FROM devfw_message");
 		page.setCountSql("SELECT COUNT(ID) AS n FROM devfw_message");

@@ -24,7 +24,7 @@
 
 	<!-- 开发环境中编译新的项目程序 -->
 	<target name="compile" depends="init">
-		<javac srcdir="src" destdir="${projectName}/WEB-INF/classes" includeantruntime="on">
+		<javac srcdir="src" destdir="${projectName}/WEB-INF/classes" includeantruntime="on" debug="true">
 			<classpath refid="servletJarDir"/>
 		</javac>
 	</target>
