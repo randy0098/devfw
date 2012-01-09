@@ -1,4 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<oracle.dbtools.crest.model.design.relational.RelationalDesign>
-   <object objectType="Table" objectID="7EB971CD-BCA6-2E2C-A83B-EE5893AC0AA9" name="DEVFW_MESSAGE" seqName="seg_0"/>
-</oracle.dbtools.crest.model.design.relational.RelationalDesign>
