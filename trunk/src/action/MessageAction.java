@@ -20,6 +20,7 @@ import to.MessageTO;
 import util.OraclePage;
 import dao.MessageDAO;
 import framework.BaseAction;
+import framework.Page;
 
 
 public class MessageAction extends BaseAction
@@ -45,6 +46,19 @@ public class MessageAction extends BaseAction
 		ActionForward actionForward = message_page(mapping,form,request,httpservletresponse);
 		return actionForward;
 	}
+	
+//	public HashMap getOptions(HttpServletRequest request){
+//		HashMap map = new HashMap();
+//		String[] options = request.getParameterValues("option");
+//		for(int i=0; i<options.length; i++){
+//			String option = options[i];
+//			String filedName = option.split("-")[0];
+//			String operator = option.split("-")[1];
+//			String value = request.getParameter(filedName);
+//			map.put(filedName, operator+"-"+value);
+//		}
+//		return null;
+//	}
 	
 	/**
 	 * 
@@ -175,9 +189,12 @@ public class MessageAction extends BaseAction
 		}else{
 			currentPageIndex = currentPageIndex2;
 		}
+		
 		OraclePage page = new OraclePage();
-		page.setQuerySql("SELECT * FROM devfw_message");
-		page.setCountSql("SELECT COUNT(ID) AS n FROM devfw_message");
+//		page.setQuerySql("SELECT * FROM devfw_message");
+//		page.setCountSql("SELECT COUNT(ID) AS n FROM devfw_message");
+		setQuerySql(request,page);
+		
 		page.setTOClassName("to.MessageTO");
 		page.setPageRecordNum(1);
 		if(action!=null && action.equalsIgnoreCase("goToFirst")==true){
@@ -200,5 +217,35 @@ public class MessageAction extends BaseAction
 		request.setAttribute("page", page);
 		ActionForward forward = mapping.findForward("success");
 		return forward;
+	}
+	
+	/**
+	 * 
+	 * 具体查询逻辑
+	 *
+	 * @param request
+	 * @param page
+	 */
+	public void setQuerySql(HttpServletRequest request,Page page){
+		String sender = request.getParameter("sender");
+		String receiver = request.getParameter("receiver");
+		String mintime = request.getParameter("mintime");
+		String maxtime = request.getParameter("maxtime");
+		String sqlPrefix = " SELECT * ";
+		String sql = " FROM devfw_message WHERE 1=1 ";
+		if(sender!=null && sender.equalsIgnoreCase("")==false){
+			sql = sql + " AND sender = '" + sender + "' ";
+		}
+		if(receiver!=null && receiver.equalsIgnoreCase("")==false){
+			sql = sql + " AND receiver LIKE '%" + receiver + "%' ";
+		}
+		if(mintime!=null && mintime.equalsIgnoreCase("")==false){
+			sql = sql + " AND msg_time >= '" + mintime + "' ";
+		}
+		if(maxtime!=null && maxtime.equalsIgnoreCase("")==false){
+			sql = sql + " AND msg_time <= '" + maxtime + "' ";
+		}
+		page.setQuerySql(sqlPrefix+sql);
+		page.setCountSql("SELECT COUNT(ID) " + sql);
 	}
 }

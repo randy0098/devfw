@@ -21,21 +21,10 @@ public class OraclePage extends Page
 	 *
 	 */
 	public void createSelectSql(){
-		String sql1 = " SELECT * ";
-		String sql2 = " FROM (SELECT ROWNUM R ";
-		String sql3 = " t1 WHERE ROWNUM <= " + this.endRecordIndex + " ) t2 ";
-		String sql4 = " Where t2.R >= " + this.startRecordIndex;
-		//以"from"进行分隔
-		String[] sqls = this.querySql.toLowerCase().split("from");
-		//去除多余字符
-		String[] fields = sqls[0].replaceAll("select", "").split(",");
-		//生成oracle分页查询中所需的字段列表
-		String newFields = "";
-		for(int i=0; i<fields.length; i++){
-			newFields = newFields + ",t1." + fields[i];
-		}
-		String sql5 = " from " + sqls[1];
-		String resultSql = sql1+sql2+newFields+sql5+sql3+sql4;
+		String sql1 = " SELECT *  FROM (SELECT ROWNUM R ,t1.* from ( ";
+		String sql2 = " ) t1 WHERE ROWNUM <= " + this.endRecordIndex + " ) t2 ";
+		String sql3 = " Where t2.R >= " + this.startRecordIndex;
+		String resultSql = sql1+this.querySql+sql2+sql3;
 		System.out.println("createdQuerySql:" + resultSql);
 		this.createdQuerySql = resultSql;
 	}
@@ -45,7 +34,7 @@ public class OraclePage extends Page
 	{
 		// TODO Auto-generated method stub
 		OraclePage page = new OraclePage();
-		page.setQuerySql("SELECT * FROM devfw_message");
+		page.setQuerySql("SELECT * FROM devfw_message WHERE 1=1 AND id = 8");
 		page.setCountSql("SELECT COUNT(ID) AS n FROM devfw_message");
 		page.setPageRecordNum(10);
 		page.setCurrentPageIndex(1);
