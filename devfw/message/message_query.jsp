@@ -16,17 +16,13 @@
 	//转到第几页
 	function goToPage(){
 		var pageIndex = document.getElementById("pageIndex").value;
-		window.location = "/devfw/message/message_page.do?action=go&currentPageIndex="+pageIndex;
+		if(isNaN(parseInt(pageIndex)) == true){
+			alert("请输入正确的页数！");
+		}else{
+			window.location = "/devfw/message/message_page.do?action=go&currentPageIndex="+pageIndex;
+		}
 	}
 	
-	//转向的页面数只能为数字
-	function checkNum(e){
-		if (!/^\d+$/.test(e.value))
-	    {
-	        e.value = /^\d+/.exec(e.value);
-	    }
-	    return false;
-	}
 </script>
 <body>
 	<a href="/devfw/message/message_insert.jsp" style="float: right">增加</a>
