@@ -148,10 +148,10 @@
     
       <action path="/login" type="action.LoginAction" >
           <forward name="fail" path="/fail.jsp" />
-          <forward name="success" path="/message_query.do" />
+          <forward name="success" path="/message/message_query.do" />
       </action>
       
-      <action path="/message_query" name="messageForm" scope="request" type="action.MessageAction" >
+      <action path="/message/message_query" name="messageForm" scope="request" type="action.MessageAction" >
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message/message_query.jsp" />
       </action>
