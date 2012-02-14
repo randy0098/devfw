@@ -70,4 +70,10 @@
   </taglib>
 -->
 
+<listener>   
+    <listener-class>bo.MySessionLinstener</listener-class>  
+</listener> 
+<listener>   
+    <listener-class>bo.MyServletContextListener</listener-class> 
+</listener> 
 </web-app>

@@ -208,7 +208,7 @@ public abstract class Page
 		while(rs.next()){
 			args[0] = rs;
 			//调用函数获得返回值
-			BaseTO to = (BaseTO)method.invoke(cls.newInstance(), args);
+			BaseVO to = (BaseVO)method.invoke(cls.newInstance(), args);
 			//返回函数结果
     		list.add(to.clone());
 		}

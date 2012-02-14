@@ -5,15 +5,15 @@
  * Copyright (c) 2010   All rights reserved. ======================
  */
 
-package to;
+package vo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import framework.BaseTO;
+import framework.BaseVO;
 
 
-public class MessageTO extends BaseTO
+public class MessageVO extends BaseVO
 {
 	private String id;
 	private String sender;
@@ -63,10 +63,10 @@ public class MessageTO extends BaseTO
     }
 	
 	@Override
-    public BaseTO buildTO(ResultSet rs) throws SQLException
+    public BaseVO buildTO(ResultSet rs) throws SQLException
     {
 	    // TODO Auto-generated method stub
-		MessageTO to = new MessageTO();
+		MessageVO to = new MessageVO();
 		to.setId(rs.getString("ID"));
 		to.setSender(rs.getString("SENDER"));
 		to.setReceiver(rs.getString("RECEIVER"));

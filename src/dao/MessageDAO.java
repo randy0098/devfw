@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import to.MessageTO;
+import vo.MessageVO;
 import framework.BaseDAO;
 import framework.DAOController;
 
@@ -38,7 +38,7 @@ public class MessageDAO extends BaseDAO
         	String receiver = rs.getString("RECEIVER");
         	String content = rs.getString("CONTENT");
         	String msg_time = rs.getString("MSG_TIME");
-    		MessageTO messageTO = new MessageTO();
+    		MessageVO messageTO = new MessageVO();
     		messageTO.setId(id);
     		messageTO.setSender(sender);
     		messageTO.setReceiver(receiver);
@@ -58,7 +58,7 @@ public class MessageDAO extends BaseDAO
 	 * @return
 	 * @throws SQLException 
 	 */
-	public static boolean insertMessage(MessageTO message) throws SQLException{
+	public static boolean insertMessage(MessageVO message) throws SQLException{
 		DAOController controller = new DAOController();
 		String values = "'"+message.getSender()+"'," + "'"+message.getReceiver()+"'," + "'"+message.getContent()+"'," + "'"+message.getMsg_time()+"'";
 		String sql = "INSERT INTO DEVFW_MESSAGE(SENDER,RECEIVER,CONTENT,MSG_TIME) VALUES("+ values + ")";
@@ -76,12 +76,12 @@ public class MessageDAO extends BaseDAO
 	 * @throws CloneNotSupportedException
 	 * @throws SQLException 
 	 */
-	public static MessageTO getMessageInfo(String id) throws CloneNotSupportedException, SQLException{
+	public static MessageVO getMessageInfo(String id) throws CloneNotSupportedException, SQLException{
 		DAOController controller = new DAOController();
 		String sql = "SELECT * FROM DEVFW_MESSAGE WHERE ID = " + id;
 		System.out.println("getMessageInfo:" + sql);
 		ResultSet rs = controller.selectOne(sql);
-		MessageTO messageTO = new MessageTO();
+		MessageVO messageTO = new MessageVO();
         while (rs.next())
         {
         	String sender = rs.getString("SENDER");
@@ -107,7 +107,7 @@ public class MessageDAO extends BaseDAO
 	 * @throws CloneNotSupportedException
 	 * @throws SQLException 
 	 */
-	public static int updateMessage(MessageTO message) throws CloneNotSupportedException, SQLException{
+	public static int updateMessage(MessageVO message) throws CloneNotSupportedException, SQLException{
 		DAOController controller = new DAOController();
 		String updateSql = "SENDER = '"+message.getSender()+"'," 
 						+ "RECEIVER = '"+message.getReceiver()+"',"

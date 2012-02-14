@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class BaseTO implements Serializable,Cloneable
+public abstract class BaseVO implements Serializable,Cloneable
 {
 	/**
 	 * 
@@ -32,5 +32,5 @@ public abstract class BaseTO implements Serializable,Cloneable
 	 * @throws SQLException 
 	 */
 	
-	public abstract BaseTO buildTO(ResultSet rs) throws SQLException;
+	public abstract BaseVO buildTO(ResultSet rs) throws SQLException;
 }
