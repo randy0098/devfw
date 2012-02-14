@@ -5,10 +5,13 @@
  * Copyright (c) 2010   All rights reserved. ======================
  */
 
-package action;
+package bo;
+
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -30,6 +33,12 @@ public class LoginAction extends BaseAction
 		}else{
 			actionForward = mapping.findForward("fail");
 		}
+		//设置用户session
+		System.out.println("login session start:"+new Date());
+		HttpSession session = request.getSession();
+		session.setAttribute("username", name);
+		session.setMaxInactiveInterval(120);
+		System.out.println("login session end"+new Date());
 		return actionForward;
 	}
 }

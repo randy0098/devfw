@@ -5,10 +5,11 @@
  * Copyright (c) 2010   All rights reserved. ======================
  */
 
-package action;
+package bo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts.action.ActionForm;
@@ -16,8 +17,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
 
-import to.MessageTO;
 import util.OraclePage;
+import vo.MessageVO;
 import dao.MessageDAO;
 import framework.BaseAction;
 import framework.Page;
@@ -76,7 +77,7 @@ public class MessageAction extends BaseAction
 	        HttpServletResponse httpservletresponse)
 	    throws Exception
 	{
-		MessageTO message = new MessageTO();
+		MessageVO message = new MessageVO();
 		DynaActionForm messageForm = (DynaActionForm)form;
 		BeanUtils.copyProperties(message, messageForm);
 		message.setMsg_time("20111226");
@@ -101,7 +102,9 @@ public class MessageAction extends BaseAction
 	        HttpServletResponse httpservletresponse)
 	    throws Exception
 	{
-		MessageTO messageTO = MessageDAO.getMessageInfo(request.getParameter("id"));
+		HttpSession session = request.getSession(false);
+		System.out.println("username:" + session.getAttribute("username"));
+		MessageVO messageTO = MessageDAO.getMessageInfo(request.getParameter("id"));
 		request.setAttribute("messageTO", messageTO);
 		ActionForward forward = mapping.findForward("success");
 		return forward;
@@ -123,7 +126,7 @@ public class MessageAction extends BaseAction
 	        HttpServletResponse httpservletresponse)
 	    throws Exception
 	{
-		MessageTO message = new MessageTO();
+		MessageVO message = new MessageVO();
 		DynaActionForm messageForm = (DynaActionForm)form;
 		BeanUtils.copyProperties(message, messageForm);
 		message.setMsg_time("20111227");

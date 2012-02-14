@@ -146,37 +146,37 @@
 
     end samples -->
     
-      <action path="/login" type="action.LoginAction" >
+      <action path="/login" type="bo.LoginAction" >
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message/message_query.do" />
       </action>
       
-      <action path="/message/message_query" name="messageForm" scope="request" type="action.MessageAction" >
+      <action path="/message/message_query" name="messageForm" scope="request" type="bo.MessageAction" >
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message/message_query.jsp" />
       </action>
       
-      <action path="/message/message_insert" name="messageForm" scope="request" type="action.MessageAction" >
+      <action path="/message/message_insert" name="messageForm" scope="request" type="bo.MessageAction" >
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message_query.do" />
       </action>
       
-      <action path="/message/message_selectOne" name="messageForm" scope="request" type="action.MessageAction" >
+      <action path="/message/message_selectOne" name="messageForm" scope="request" type="bo.MessageAction" >
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message/message_update.jsp" />
       </action>
       
-      <action path="/message/message_update" name="messageForm" scope="request" type="action.MessageAction" >
+      <action path="/message/message_update" name="messageForm" scope="request" type="bo.MessageAction" >
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message_query.do" />
       </action>
       
-      <action path="/message/message_delete" name="messageForm" scope="request" type="action.MessageAction" >
+      <action path="/message/message_delete" name="messageForm" scope="request" type="bo.MessageAction" >
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message_query.do" />
       </action>
       
-      <action path="/message/message_page" name="messageForm" scope="request" type="action.MessageAction" >
+      <action path="/message/message_page" name="messageForm" scope="request" type="bo.MessageAction" >
           <forward name="fail" path="/fail.jsp" />
           <forward name="success" path="/message/message_query.jsp" />
       </action>
