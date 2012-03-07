@@ -1,0 +1,116 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" id="7EB971CD-BCA6-2E2C-A83B-EE5893AC0AA9" directorySegmentName="seg_0" name="DEVFW_MESSAGE">
+   <createdBy>xiafeng</createdBy>
+   <createdTime>2011-12-23 03:16:49 UTC</createdTime>
+   <changedBy>xiafeng</changedBy>
+   <changedTime>2011-12-23 04:32:27 UTC</changedTime>
+   <ownerDesignName>db_design</ownerDesignName>
+   <pkName>MESSAGE_PK</pkName>
+   <fonts>
+      <FontObject class="oracle.dbtools.crest.model.design.FontObjectWr">
+         <foType>Title</foType>
+         <fontStyle>1</fontStyle>
+         <colorRGB>-16776961</colorRGB>
+      </FontObject>
+      <FontObject class="oracle.dbtools.crest.model.design.FontObjectWr">
+         <foType>Column</foType>
+         <colorRGB>-16777216</colorRGB>
+      </FontObject>
+      <FontObject class="oracle.dbtools.crest.model.design.FontObjectWr">
+         <foType>Datatype</foType>
+         <colorRGB>-16744448</colorRGB>
+      </FontObject>
+      <FontObject class="oracle.dbtools.crest.model.design.FontObjectWr">
+         <foType>PK Element</foType>
+         <colorRGB>-16776961</colorRGB>
+      </FontObject>
+      <FontObject class="oracle.dbtools.crest.model.design.FontObjectWr">
+         <foType>FK Element</foType>
+         <colorRGB>-16777216</colorRGB>
+      </FontObject>
+      <FontObject class="oracle.dbtools.crest.model.design.FontObjectWr">
+         <foType>UK Element</foType>
+         <colorRGB>-16776961</colorRGB>
+      </FontObject>
+      <FontObject class="oracle.dbtools.crest.model.design.FontObjectWr">
+         <foType>Not Null</foType>
+         <colorRGB>-65536</colorRGB>
+      </FontObject>
+      <FontObject class="oracle.dbtools.crest.model.design.FontObjectWr">
+         <foType>Key</foType>
+         <colorRGB>-16777216</colorRGB>
+      </FontObject>
+   </fonts>
+   <columns>
+      <Column class="oracle.dbtools.crest.model.design.relational.Column" name="ID" id="6CD68308-F422-56BF-1E4C-84118BFE602A">
+         <createdBy>xiafeng</createdBy>
+         <createdTime>2011-12-23 03:18:38 UTC</createdTime>
+         <changedBy>xiafeng</changedBy>
+         <changedTime>2011-12-23 03:18:38 UTC</changedTime>
+         <ownerDesignName>db_design</ownerDesignName>
+         <use>1</use>
+         <logicalDatatype>LOGDT011</logicalDatatype>
+         <autoIncrementColumn>true</autoIncrementColumn>
+         <identityColumn>true</identityColumn>
+         <autoIncrementGenerateAlways>true</autoIncrementGenerateAlways>
+         <autoIncrementCycle>false</autoIncrementCycle>
+      </Column>
+      <Column class="oracle.dbtools.crest.model.design.relational.Column" name="SENDER" id="7AA5A869-5ACC-8369-1B7E-FF11D226B67E">
+         <createdBy>xiafeng</createdBy>
+         <createdTime>2011-12-23 03:19:39 UTC</createdTime>
+         <changedBy>xiafeng</changedBy>
+         <changedTime>2011-12-23 03:20:28 UTC</changedTime>
+         <ownerDesignName>db_design</ownerDesignName>
+         <nullsAllowed>true</nullsAllowed>
+         <use>1</use>
+         <logicalDatatype>LOGDT024</logicalDatatype>
+         <dataTypeSize>32</dataTypeSize>
+      </Column>
+      <Column class="oracle.dbtools.crest.model.design.relational.Column" name="RECEIVER" id="D3AA8612-43E5-6221-83FF-6B45DF899238">
+         <createdBy>xiafeng</createdBy>
+         <createdTime>2011-12-23 03:20:51 UTC</createdTime>
+         <changedBy>xiafeng</changedBy>
+         <changedTime>2011-12-23 04:17:52 UTC</changedTime>
+         <ownerDesignName>db_design</ownerDesignName>
+         <nullsAllowed>true</nullsAllowed>
+         <use>1</use>
+         <logicalDatatype>LOGDT024</logicalDatatype>
+         <dataTypeSize>32</dataTypeSize>
+      </Column>
+      <Column class="oracle.dbtools.crest.model.design.relational.Column" name="CONTENT" id="7D467918-F95A-4085-3DC3-5BDAC36726BB">
+         <createdBy>xiafeng</createdBy>
+         <createdTime>2011-12-23 03:21:13 UTC</createdTime>
+         <changedBy>xiafeng</changedBy>
+         <changedTime>2011-12-23 03:21:13 UTC</changedTime>
+         <ownerDesignName>db_design</ownerDesignName>
+         <nullsAllowed>true</nullsAllowed>
+         <use>1</use>
+         <logicalDatatype>LOGDT040</logicalDatatype>
+      </Column>
+      <Column class="oracle.dbtools.crest.model.design.relational.Column" name="MSG_TIME" id="249BEEE3-79FA-B27A-2EAA-463191F676E8">
+         <createdBy>xiafeng</createdBy>
+         <createdTime>2011-12-23 03:21:29 UTC</createdTime>
+         <changedBy>xiafeng</changedBy>
+         <changedTime>2011-12-23 03:26:12 UTC</changedTime>
+         <ownerDesignName>db_design</ownerDesignName>
+         <nullsAllowed>true</nullsAllowed>
+         <use>1</use>
+         <logicalDatatype>LOGDT024</logicalDatatype>
+         <dataTypeSize>32</dataTypeSize>
+      </Column>
+   </columns>
+   <indexes>
+      <ind_PK_UK class="oracle.dbtools.crest.model.design.relational.Index" id="08AA59DF-4430-C221-3FF3-494FE30BE7F2" name="MESSAGE_PK">
+         <createdBy>xiafeng</createdBy>
+         <createdTime>2011-12-23 03:18:38 UTC</createdTime>
+         <changedBy>xiafeng</changedBy>
+         <changedTime>2011-12-23 03:18:38 UTC</changedTime>
+         <ownerDesignName>db_design</ownerDesignName>
+         <pk>true</pk>
+         <indexState>Primary Constraint</indexState>
+         <indexColumnUsage>
+            <colUsage columnID="6CD68308-F422-56BF-1E4C-84118BFE602A"/>
+         </indexColumnUsage>
+      </ind_PK_UK>
+   </indexes>
+</Table>
