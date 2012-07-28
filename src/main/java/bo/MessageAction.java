@@ -82,7 +82,7 @@ public class MessageAction extends BaseAction
 		BeanUtils.copyProperties(message, messageForm);
 		message.setMsg_time("20111226");
 		MessageDAO.insertMessage(message);
-		ActionForward forward = mapping.findForward("success");
+		ActionForward forward = mapping.findForward("insert_success");
 		return forward;
 	}
 	
@@ -106,7 +106,7 @@ public class MessageAction extends BaseAction
 		System.out.println("username:" + session.getAttribute("username"));
 		MessageVO messageVO = MessageDAO.getMessageInfo(request.getParameter("id"));
 		request.setAttribute("messageVO", messageVO);
-		ActionForward forward = mapping.findForward("success");
+		ActionForward forward = mapping.findForward("selectOne_success");
 		return forward;
 	}
 	
@@ -131,7 +131,7 @@ public class MessageAction extends BaseAction
 		BeanUtils.copyProperties(message, messageForm);
 		message.setMsg_time("20111227");
 		MessageDAO.updateMessage(message);
-		ActionForward forward = mapping.findForward("success");
+		ActionForward forward = mapping.findForward("update_success");
 		return forward;
 	}
 	
@@ -153,7 +153,7 @@ public class MessageAction extends BaseAction
 	    throws Exception
 	{
 		MessageDAO.deleteMessage(request.getParameter("id"));
-		ActionForward forward = mapping.findForward("success");
+		ActionForward forward = mapping.findForward("delete_success");
 		return forward;
 	}
 	
@@ -218,7 +218,7 @@ public class MessageAction extends BaseAction
 			page.go(Integer.parseInt(currentPageIndex));
 		}
 		request.setAttribute("page", page);
-		ActionForward forward = mapping.findForward("success");
+		ActionForward forward = mapping.findForward("query_success");
 		return forward;
 	}
 	

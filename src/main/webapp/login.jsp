@@ -7,7 +7,7 @@
 <title>登陆页面</title>
 </head>
 <body>
-	<form action="login.do" method="post">
+	<form action="login.do?method=login" method="post">
 		用户名：<input name="name"><br /> 
 		密码：<input type="password" name="password"><br/> 
 		<input type="submit" value="提交">
