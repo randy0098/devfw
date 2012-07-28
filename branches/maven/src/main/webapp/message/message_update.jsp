@@ -7,7 +7,7 @@
 <title>修改短信信息</title>
 </head>
 <body>
-	<form action="message_update.do" method="post">
+	<form action="/devfw/message.do?method=message_update" method="post">
 		<table border="1" width="100%">
 			<tr>
 				<td width="30%">发送者：</td>

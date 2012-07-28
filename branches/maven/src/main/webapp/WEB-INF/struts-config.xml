@@ -146,39 +146,19 @@
 
     end samples -->
     
-      <action path="/login" type="bo.LoginAction" >
+      <action path="/login" type="bo.LoginAction" parameter="method">
           <forward name="fail" path="/fail.jsp" />
-          <forward name="success" path="/message/message_query.do" />
+          <forward name="success" path="/message.do?method=message_query" />
       </action>
       
-      <action path="/message/message_query" name="messageForm" scope="request" type="bo.MessageAction" >
+      <action path="/message" name="messageForm" scope="request" type="bo.MessageAction" parameter="method">
           <forward name="fail" path="/fail.jsp" />
-          <forward name="success" path="/message/message_query.jsp" />
-      </action>
-      
-      <action path="/message/message_insert" name="messageForm" scope="request" type="bo.MessageAction" >
-          <forward name="fail" path="/fail.jsp" />
-          <forward name="success" path="/message_query.do" />
-      </action>
-      
-      <action path="/message/message_selectOne" name="messageForm" scope="request" type="bo.MessageAction" >
-          <forward name="fail" path="/fail.jsp" />
-          <forward name="success" path="/message/message_update.jsp" />
-      </action>
-      
-      <action path="/message/message_update" name="messageForm" scope="request" type="bo.MessageAction" >
-          <forward name="fail" path="/fail.jsp" />
-          <forward name="success" path="/message_query.do" />
-      </action>
-      
-      <action path="/message/message_delete" name="messageForm" scope="request" type="bo.MessageAction" >
-          <forward name="fail" path="/fail.jsp" />
-          <forward name="success" path="/message_query.do" />
-      </action>
-      
-      <action path="/message/message_page" name="messageForm" scope="request" type="bo.MessageAction" >
-          <forward name="fail" path="/fail.jsp" />
-          <forward name="success" path="/message/message_query.jsp" />
+          <forward name="query_success" path="/message/message_query.jsp" />
+          <forward name="insert_success" path="/message.do?method=message_query" />
+          <forward name="selectOne_success" path="/message/message_update.jsp" />
+          <forward name="update_success" path="/message.do?method=message_query" />
+          <forward name="delete_success" path="/message.do?method=message_query" />
+          <forward name="page_success" path="/message/message_query.jsp" />
       </action>
       
     </action-mappings>

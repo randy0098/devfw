@@ -15,7 +15,7 @@
 	
 	//分页跳转
 	function paging(action){
-		var url = "/devfw/message/message_page.do?action=";
+		var url = "/devfw/message.do?method=message_page&action=";
 		//首页
 		if(action == "goToFirst"){
 			url = url + "goToFirst";
@@ -47,7 +47,7 @@
 	}
 </script>
 <body>
-	<form action="/devfw/message/message_query.do" name="f1" method="post" >
+	<form action="/devfw/message.do?method=message_query" name="f1" method="post" >
 		<table width="100%" >
 			<tr>
 				<td>sender：</td>
@@ -88,8 +88,8 @@
 					<td>${message.content}</td>
 					<td>${message.msg_time}</td>
 					<td>
-						<a href="/devfw/message/message_selectOne.do?id=${message.id}"/>修改</a>
-						<a href="/devfw/message/message_delete.do?id=${message.id}" onclick="return confirm('确定删除此记录？')">删除</a>
+						<a href="/devfw/message.do?method=message_selectOne&id=${message.id}"/>修改</a>
+						<a href="/devfw/message.do?method=message_delete&id=${message.id}" onclick="return confirm('确定删除此记录？')">删除</a>
 					</td>
 				</tr>
 			</c:forEach>
