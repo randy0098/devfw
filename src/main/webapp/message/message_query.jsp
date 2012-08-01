@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/common/header.jsp"%> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,7 +16,7 @@
 	
 	//分页跳转
 	function paging(action){
-		var url = "/devfw/message.do?method=message_page&action=";
+		var url = "message.do?method=message_page&action=";
 		//首页
 		if(action == "goToFirst"){
 			url = url + "goToFirst";
@@ -47,7 +48,7 @@
 	}
 </script>
 <body>
-	<form action="/devfw/message.do?method=message_query" name="f1" method="post" >
+	<form action="message.do?method=message_query" name="f1" method="post" >
 		<table width="100%" >
 			<tr>
 				<td>sender：</td>
@@ -77,7 +78,7 @@
 			</tr>
 		</table>
 		
-		<a href="/devfw/message/message_insert.jsp" style="float: right">增加</a>
+		<a href="message/message_insert.jsp" style="float: right">增加</a>
 		<table width="100%" border="1">
 			<tr><th>id</th><th>sender</th><th>receiver</th><th>content</th><th>msg_time</th><th>操作</th></tr>
 			<c:forEach var="message" items="${page.records}">
@@ -88,17 +89,17 @@
 					<td>${message.content}</td>
 					<td>${message.msg_time}</td>
 					<td>
-						<a href="/devfw/message.do?method=message_selectOne&id=${message.id}"/>修改</a>
-						<a href="/devfw/message.do?method=message_delete&id=${message.id}" onclick="return confirm('确定删除此记录？')">删除</a>
+						<a href="message.do?method=message_selectOne&id=${message.id}"/>修改</a>
+						<a href="message.do?method=message_delete&id=${message.id}" onclick="return confirm('确定删除此记录？')">删除</a>
 					</td>
 				</tr>
 			</c:forEach>
 			<tr>
 				<td colspan="6">
-					<a href="#" onclick="paging('goToFirst')">首页</a>
-					<a href="#" onclick="paging('goToLast')">尾页</a>
-					<a href="#" onclick="paging('back')">上一页</a>
-					<a href="#" onclick="paging('next')">下一页</a>
+					<a href="" onclick="paging('goToFirst');return false">首页</a>
+					<a href="" onclick="paging('goToLast');return false">尾页</a>
+					<a href="" onclick="paging('back');return false">上一页</a>
+					<a href="" onclick="paging('next');return false">下一页</a>
 					转到第<input type="text" id="pageIndex" onkeypress="return event.keyCode>=48&&event.keyCode<=57" onpaste="return !clipboardData.getData('text').match(/\D/)" ondragenter="return false" style="ime-mode:Disabled">页
 					<input type="button" value="go" onclick="paging('go')">
 					每页显示${page.pageRecordNum}条
